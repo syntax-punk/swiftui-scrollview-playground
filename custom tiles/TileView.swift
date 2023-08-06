@@ -11,16 +11,16 @@ struct TileView: View {
     let item: Nature
     let size: CGFloat
     let cornerRadius: CGFloat
+    let shadow: CGFloat
     
     var body: some View {
         Image(item.imageName)
             .resizable()
             .scaledToFill()
             .frame(width: size, height: size)
-            .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-            //.cornerRadius(cornerRadius)
-            .shadow(radius: 6)
-        
+            //.clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+            .cornerRadius(cornerRadius)
+            .shadow(radius: shadow)
             .overlay(alignment: .bottomTrailing) {
                 Text(item.name)
                     .bold()
@@ -36,7 +36,8 @@ struct TileView_Previews: PreviewProvider {
     static var previews: some View {
         TileView(item: Nature.exampleDunes(),
                  size: 300,
-                 cornerRadius: 16
+                 cornerRadius: 16,
+                 shadow: 6
         )
         .padding()
     }
