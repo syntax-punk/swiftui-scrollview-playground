@@ -14,13 +14,20 @@ struct MetroListView: View {
     //let rows = [GridItem(.fixed(100)), GridItem(.fixed(100))]
     
     var body: some View {
-        ScrollView(.horizontal) {
-            LazyHGrid(rows: rows, spacing: 0) {
-                ForEach(list) { item in
-                    TileView(item: item, size: 140, cornerRadius: 0, shadow: 0)
+        Section {
+            ScrollView(.horizontal) {
+                LazyHGrid(rows: rows, spacing: 0) {
+                    ForEach(list) { item in
+                        TileView(item: item, size: 140, cornerRadius: 0, shadow: 0)
+                    }
                 }
             }
+        } header: {
+            Text("Last Visited")
+                .modifier(SectionHeaderStyling())
+                .padding(.leading)
         }
+        
     }
 }
 

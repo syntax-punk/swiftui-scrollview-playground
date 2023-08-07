@@ -8,25 +8,29 @@
 import SwiftUI
 
 struct ListView: View {
-    @State private var natureList = Nature.examples_massive()
+    let list: [Nature]
     
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(natureList) { item in
+        LazyVStack(alignment: .leading, spacing: 10, pinnedViews: .sectionHeaders) {
+            Section {
+                ForEach(list) { item in
                     RowView(nature: item)
                 }
                 .listRowSeparator(.hidden)
                 .listRowInsets(.init(top: 10, leading: 10, bottom: 0, trailing: 10))
+            } header: {
+                Text("Last Section")
+                    .modifier(SectionHeaderStyling())
             }
-            .listStyle(.plain)
-            .navigationTitle("Nature")
+
         }
+        .listStyle(.plain)
+        .padding()
     }
 }
 
 struct ListView_Previews: PreviewProvider {
     static var previews: some View {
-        ListView()
+        ListView(list: Nature.examples_massive())
     }
 }
